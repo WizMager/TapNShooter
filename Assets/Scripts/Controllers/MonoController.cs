@@ -3,7 +3,7 @@ using Controllers.Interfaces;
 
 namespace Controllers
 {
-    public class Controllers : IAwake, IStart, IEnable, IUpdate, IFixedUpdate, IDisable, IDestroy
+    public class MonoController : IAwake, IStart, IEnable, IUpdate, IFixedUpdate, IDisable, IDestroy
     {
         private readonly List<IAwake> _awakes;
         private readonly List<IStart> _starts;
@@ -13,7 +13,7 @@ namespace Controllers
         private readonly List<IDisable> _disables;
         private readonly List<IDestroy> _destroys;
 
-        public Controllers()
+        public MonoController()
         {
             _awakes = new List<IAwake>();
             _starts = new List<IStart>();
@@ -24,7 +24,7 @@ namespace Controllers
             _destroys = new List<IDestroy>();
         }
 
-        internal Controllers Add(IController controller)
+        internal MonoController Add(IController controller)
         {
             if (controller is IAwake awake)
             {
@@ -64,7 +64,7 @@ namespace Controllers
             return this;
         }
         
-        internal Controllers Remove(IController controller)
+        internal MonoController Remove(IController controller)
         {
             if (controller is IAwake awake)
             {

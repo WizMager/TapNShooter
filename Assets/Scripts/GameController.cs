@@ -1,45 +1,46 @@
-﻿using Data;
+﻿using Controllers;
+using Data;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private AllData data;
-    private Controllers.Controllers _controllers;
+    private MonoController _monoController;
 
     private void Awake()
     {
-        _controllers = new Controllers.Controllers();
-        new GameInitialization(data, _controllers);
-        _controllers.Awake();
+        _monoController = new MonoController();
+        new GameInitialization(data, _monoController);
+        _monoController.Awake();
     }
 
     private void OnEnable()
     {
-        _controllers.OnEnable();
+        _monoController.OnEnable();
     }
 
     private void Start()
     {
-        _controllers.Start();
+        _monoController.Start();
     }
 
     private void Update()
     {
-        _controllers.Update();
+        _monoController.Update();
     }
 
     private void FixedUpdate()
     {
-        _controllers.FixedUpdate();
+        _monoController.FixedUpdate();
     }
 
     private void OnDisable()
     {
-        _controllers.OnDisable();
+        _monoController.OnDisable();
     }
 
     private void OnDestroy()
     {
-        _controllers.OnDestroy();
+        _monoController.OnDestroy();
     }
 }
