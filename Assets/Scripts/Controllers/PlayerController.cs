@@ -2,31 +2,32 @@
 using System.Linq;
 using Controllers.Interfaces;
 using Data;
-using Models;
 using State;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Controllers
 {
     public class PlayerController : IEnable, IUpdate, IDisable, IStateSwitcher
     {
         private readonly InputActions _inputActions;
-        private PlayerModel _playerModel;
+        private NavMeshAgent _navMeshAgent;
         private Animator _playerAnimator;
         private BaseState _currentState;
         private readonly List<BaseState> _allStates;
 
-        public PlayerController(PlayerData playerData)
+        public PlayerController(NavMeshAgent playerAgent, WaypointData waypointData, Transform playerTransform)
         {
-            _playerModel = new PlayerModel(playerData);
+            _navMeshAgent = playerAgent;
             _inputActions = new InputActions();
             _allStates = new List<BaseState>
             {
-                new PlayerIdleState(_playerAnimator, this, _inputActions),
-                new PlayerRunState(_playerAnimator, this, _inputActions),
-                new PlayerShootState(_playerAnimator, this, _inputActions)
+                new PlayerIdleState(_playerAnimator, this, _inputActions, playerTransform, waypointData.waypoints[0]),
+                new PlayerRunState(_playerAnimator, this, _inputActions, _navMeshAgent, waypointData.waypoints),
+                new PlayerShootState(_playerAnimator, this, _inputActions),
             };
             _currentState = _allStates[0];
+            _currentState.Start();
         }
 
         public void OnEnable()
