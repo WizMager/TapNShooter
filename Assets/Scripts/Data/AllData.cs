@@ -7,7 +7,6 @@ namespace Data
     public class AllData: ScriptableObject
     {
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private WaypointData waypointData;
         [SerializeField] private PrefabsData prefabsData;
 
         public PlayerData GetPlayerData
@@ -21,19 +20,7 @@ namespace Data
                 throw new ArgumentNullException("PlayerData is null. Forget create or linked?");
             }
         }
-        
-        public WaypointData GetWaypointData
-        {
-            get
-            {
-                if (waypointData != null)
-                {
-                    return waypointData;
-                }
-                throw new ArgumentNullException("WaypointData is null. Forget create or linked?");
-            }
-        }
-        
+
         public PrefabsData GetPrefabsData
         {
             get

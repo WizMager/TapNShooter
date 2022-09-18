@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Views;
 
 namespace State
 {
@@ -8,12 +9,14 @@ namespace State
     {
         private readonly NavMeshAgent _navMeshAgent;
         private readonly List<Transform> _wayPoints;
-        private int _currentWaypoint = 3;
+        private readonly Transform _playerTransform;
+        private int _currentWaypoint;
 
-        public PlayerRunState(Animator animator, IStateSwitcher stateSwitcher, InputActions inputActions, NavMeshAgent playerAgent, Transform[] waypoints) : base(animator, stateSwitcher, inputActions)
+        public PlayerRunState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions, Transform[] waypoints) : base(playerView, stateSwitcher, inputActions)
         {
-            _navMeshAgent = playerAgent;
+            _navMeshAgent = playerView.GetNavMeshAgent;
             _wayPoints = new List<Transform>(waypoints.Length);
+            _playerTransform = playerView.GetPlayerTransform;
             foreach (var waypoint in waypoints)
             {
                 _wayPoints.Add(waypoint);
@@ -23,11 +26,7 @@ namespace State
         public override void Start()
         {
             Debug.Log("Start run");
-            if (_currentWaypoint + 1 == _wayPoints.Count)
-            {
-                _currentWaypoint = 0;
-                _stateSwitcher.SwitchState<PlayerIdleState>(); 
-            }
+            _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_wayPoints[_currentWaypoint + 1].position);
 
             //TODO: start run animation
@@ -35,15 +34,20 @@ namespace State
 
         public override void Update()
         {
-            if (_navMeshAgent.remainingDistance > 0) return;
+            if (_navMeshAgent.remainingDistance > 0.05f) return;
             _currentWaypoint++;
+            _navMeshAgent.enabled = false;
+            _playerTransform.rotation = _wayPoints[_currentWaypoint].rotation;
             _stateSwitcher.SwitchState<PlayerShootState>();
-
         }
 
         public override void Stop()
         {
             Debug.Log("Stop run");
+            if (_currentWaypoint + 1 == _wayPoints.Count)
+            {
+                _currentWaypoint = 0;
+            }
             //TODO: stop run animation
         }
     }

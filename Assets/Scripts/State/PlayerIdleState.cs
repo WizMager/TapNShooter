@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Views;
 
 namespace State
 {
@@ -7,17 +10,23 @@ namespace State
     {
         private readonly Transform _playerTransform;
         private readonly Transform _playerSpawnPosition;
-        
-        public PlayerIdleState(Animator animator, IStateSwitcher stateSwitcher, InputActions inputActions, Transform playerTransform, Transform playerSpawnPosition) : base(animator, stateSwitcher, inputActions)
+        private readonly List<GameObject> _allEnemies;
+
+        public PlayerIdleState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions, Transform playerSpawnPosition, List<GameObject> allEnemies) : base(playerView, stateSwitcher, inputActions)
         {
-            _playerTransform = playerTransform;
+            _playerTransform = playerView.GetPlayerTransform;
             _playerSpawnPosition = playerSpawnPosition;
+            _allEnemies = allEnemies;
         }
         
         public override void Start()
         {
             Debug.Log("Start idle");
             _playerTransform.SetPositionAndRotation(_playerSpawnPosition.position, _playerSpawnPosition.rotation);
+            foreach (var enemy in _allEnemies)
+            {
+                enemy.SetActive(true);
+            }
             _inputActions.Player.Touch.performed += OnTouchHandler;
             //TODO: start idle animation
         }

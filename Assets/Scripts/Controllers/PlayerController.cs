@@ -4,27 +4,24 @@ using Controllers.Interfaces;
 using Data;
 using State;
 using UnityEngine;
-using UnityEngine.AI;
+using Views;
 
 namespace Controllers
 {
     public class PlayerController : IEnable, IUpdate, IDisable, IStateSwitcher
     {
         private readonly InputActions _inputActions;
-        private NavMeshAgent _navMeshAgent;
-        private Animator _playerAnimator;
         private BaseState _currentState;
         private readonly List<BaseState> _allStates;
 
-        public PlayerController(NavMeshAgent playerAgent, WaypointData waypointData, Transform playerTransform)
+        public PlayerController(PlayerView playerView, Transform[] waypoints, PrefabsData prefabsData, List<GameObject> allEnemies)
         {
-            _navMeshAgent = playerAgent;
             _inputActions = new InputActions();
             _allStates = new List<BaseState>
             {
-                new PlayerIdleState(_playerAnimator, this, _inputActions, playerTransform, waypointData.waypoints[0]),
-                new PlayerRunState(_playerAnimator, this, _inputActions, _navMeshAgent, waypointData.waypoints),
-                new PlayerShootState(_playerAnimator, this, _inputActions),
+                new PlayerIdleState(playerView, this, _inputActions, waypoints[0], allEnemies),
+                new PlayerRunState(playerView, this, _inputActions, waypoints),
+                new PlayerShootState(playerView, this, _inputActions, prefabsData.bulletPrefab, waypoints.Length)
             };
             _currentState = _allStates[0];
             _currentState.Start();

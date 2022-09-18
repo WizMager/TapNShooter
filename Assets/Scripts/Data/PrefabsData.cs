@@ -6,5 +6,6 @@ namespace Data
     public class PrefabsData : ScriptableObject
     {
         public GameObject playerPrefab;
+        public GameObject bulletPrefab;
     }
 }

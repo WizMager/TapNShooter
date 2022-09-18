@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PrefabsData
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8355695595072138940, guid: 9fab1d412f872b841a45514ff7a01acc, type: 3}
+  bulletPrefab: {fileID: 1250608550728451250, guid: 9ac18a62418505245bcc99ad9aa1ef48, type: 3}
