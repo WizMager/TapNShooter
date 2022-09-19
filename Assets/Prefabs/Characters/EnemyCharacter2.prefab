@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8990046915741269590}
   - component: {fileID: 2199019141589013724}
   m_Layer: 0
-  m_Name: EnemyCharacter
+  m_Name: EnemyCharacter2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddd37027c2040708b13304e83638e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 1
+  startHealth: 2
   healthSlider: {fileID: 6068322458632056985}
 --- !u!136 &2199019141589013724
 CapsuleCollider:
@@ -1733,7 +1733,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d9674097da42b2448220c5e2805bb27, type: 2}
+  - {fileID: 2100000, guid: 940d4c7d3d8f0ff4aab297e184fe9ffd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

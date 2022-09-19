@@ -857,6 +857,7 @@ MonoBehaviour:
   - {fileID: 2132704005}
   - {fileID: 1290984715}
   - {fileID: 81289293}
+  enemyType: 1
 --- !u!1001 &240177616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3261,6 +3262,7 @@ MonoBehaviour:
   - {fileID: 1104238018}
   - {fileID: 425917858}
   - {fileID: 1207203917}
+  enemyType: 0
 --- !u!1 &1207203916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,6 +3532,7 @@ MonoBehaviour:
   - {fileID: 1872472074}
   - {fileID: 1517442907}
   - {fileID: 534738776}
+  enemyType: 0
 --- !u!1001 &1334100865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5757,6 +5760,7 @@ MonoBehaviour:
   - {fileID: 1847425496}
   - {fileID: 69063761}
   - {fileID: 28403477}
+  enemyType: 0
 --- !u!1001 &2110396896
 PrefabInstance:
   m_ObjectHideFlags: 0
