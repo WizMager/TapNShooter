@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23359314820454554}
   - component: {fileID: 1182672788}
   - component: {fileID: 953015334957143840}
+  - component: {fileID: 1870309894122285429}
   m_Layer: 0
   m_Name: SM_Bean_Female_01
   m_TagString: Enemy
@@ -110,3 +111,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 1
+--- !u!111 &1870309894122285429
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965410809269166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

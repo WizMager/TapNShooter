@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Views;
 
@@ -22,13 +21,13 @@ namespace State
         public override void Start()
         {
             Debug.Log("Start idle");
+            
             _playerTransform.SetPositionAndRotation(_playerSpawnPosition.position, _playerSpawnPosition.rotation);
             foreach (var enemy in _allEnemies)
             {
                 enemy.SetActive(true);
             }
             _inputActions.Player.Touch.performed += OnTouchHandler;
-            //TODO: start idle animation
         }
 
         private void OnTouchHandler(InputAction.CallbackContext obj)
@@ -40,7 +39,6 @@ namespace State
         {
             Debug.Log("Stop idle");
             _inputActions.Player.Touch.performed -= OnTouchHandler;
-            //TODO: stop idle animation
         }
     }
 }

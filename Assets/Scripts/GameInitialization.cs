@@ -10,7 +10,7 @@ public class GameInitialization
         public GameInitialization(AllData data, MonoController monoController)
         {
             var waypointView = Object.FindObjectOfType<WaypointView>();
-            var playerView = Object.Instantiate(data.GetPrefabsData.playerPrefab).GetComponent<PlayerView>();
+            var playerView = Object.Instantiate(data.GetPrefabsData.playerPrefab, waypointView.GetWaypoints[0].position, waypointView.GetWaypoints[0].rotation).GetComponent<PlayerView>();
             var allEnemyViews = Object.FindObjectsOfType<EnemyView>();
             var allEnemy = new List<GameObject>(allEnemyViews.Length);
             allEnemy.AddRange(allEnemyViews.Select(enemy => enemy.gameObject));

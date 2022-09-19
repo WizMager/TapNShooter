@@ -28,8 +28,7 @@ namespace State
             Debug.Log("Start run");
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_wayPoints[_currentWaypoint + 1].position);
-
-            //TODO: start run animation
+            _animator.CrossFade("Run", 0.05f);
         }
 
         public override void Update()
@@ -48,7 +47,7 @@ namespace State
             {
                 _currentWaypoint = 0;
             }
-            //TODO: stop run animation
+            _animator.CrossFade("Idle", 0.05f);
         }
     }
 }

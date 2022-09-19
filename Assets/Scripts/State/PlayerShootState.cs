@@ -27,11 +27,11 @@ namespace State
             Debug.Log("Start shoot");
             _inputActions.Player.Touch.performed += OnTouchHandler;
             _enemyCount = 4;
-            //TODO: start idle animation because wait for shoot input
         }
 
         private void OnTouchHandler(InputAction.CallbackContext obj)
         {
+            _animator.CrossFade("Punch", 0.05f);
             var tapPosition = _inputActions.Player.TouchPosition.ReadValue<Vector2>();
             var shootRay = _camera.ScreenPointToRay(tapPosition);
             var bulletDirection = shootRay.GetPoint(20f) - _shootPosition.position;
@@ -64,7 +64,6 @@ namespace State
         {
             Debug.Log("Stop shoot");
             _inputActions.Player.Touch.performed -= OnTouchHandler;
-            //TODO: stop any animation
         }
     }
 }

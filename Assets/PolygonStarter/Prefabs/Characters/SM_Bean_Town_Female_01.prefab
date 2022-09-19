@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23951924020936520}
   - component: {fileID: 6392449042159061479}
   - component: {fileID: 1198635455683640750}
+  - component: {fileID: 8310348420940259110}
   m_Layer: 0
   m_Name: SM_Bean_Town_Female_01
   m_TagString: Untagged
@@ -110,3 +111,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 1
+--- !u!111 &8310348420940259110
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645872946987862}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23759752699054724}
   - component: {fileID: 1133228074997337378}
   - component: {fileID: 2926626733896618519}
+  - component: {fileID: 4762662743975453957}
   m_Layer: 0
   m_Name: SM_Bean_Cop_01
   m_TagString: Untagged
@@ -110,3 +111,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 1
+--- !u!111 &4762662743975453957
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283017171755564}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 02a37b0b7a91e2946bd0153fc073b272, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
