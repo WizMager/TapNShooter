@@ -12,7 +12,7 @@ namespace Views
         public void Shoot(Transform shootPosition, Vector3 forceDirection)
         {
             transform.SetPositionAndRotation(shootPosition.position, shootPosition.rotation);
-            bulletRigidbody.AddForce(forceDirection * bulletSpeed, ForceMode.Impulse);
+            bulletRigidbody.AddForce(forceDirection * bulletSpeed * bulletRigidbody.mass, ForceMode.Impulse);
         }
 
         private void OnTriggerEnter(Collider other)

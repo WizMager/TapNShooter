@@ -23,6 +23,7 @@ namespace State
             _playerTransform.SetPositionAndRotation(_playerSpawnPosition.position, _playerSpawnPosition.rotation);
             foreach (var enemy in _allEnemies)
             {
+                enemy.SetActive(false);
                 enemy.SetActive(true);
             }
             _inputActions.Player.Touch.performed += OnTouchHandler;

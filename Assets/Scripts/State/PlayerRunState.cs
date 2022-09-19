@@ -25,7 +25,6 @@ namespace State
 
         public override void Start()
         {
-            Debug.Log("Start run");
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_wayPoints[_currentWaypoint + 1].position);
             _animator.CrossFade("Run", 0.05f);
@@ -42,7 +41,6 @@ namespace State
 
         public override void Stop()
         {
-            Debug.Log("Stop run");
             if (_currentWaypoint + 1 == _wayPoints.Count)
             {
                 _currentWaypoint = 0;

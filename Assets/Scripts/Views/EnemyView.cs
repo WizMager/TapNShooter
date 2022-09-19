@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Views
@@ -7,19 +9,45 @@ namespace Views
     {
         [SerializeField] private int startHealth;
         [SerializeField] private Slider healthSlider;
+        [SerializeField] private Animator animator;
+        [SerializeField] private CapsuleCollider rootCollider;
+        [SerializeField] private Rigidbody[] rigidbodies;
+        [SerializeField] private float deactivateTime;
+        [SerializeField] private Transform hips;
         private int _health;
         private Transform _cameraTransform;
+        private Vector3 _startHipsPosition;
 
-        public void SetCameraTransform(Transform cameraTransform)
+        public void Init(Transform cameraTransform)
         {
             _cameraTransform = cameraTransform;
         }
-        
+
+        private void Awake()
+        {
+            _startHipsPosition = hips.position;
+        }
+
         private void OnEnable()
         {
+            RigidbodyActivation(false);
+            hips.position = _startHipsPosition;
+            rootCollider.enabled = true;
+            healthSlider.gameObject.SetActive(true);
             _health = startHealth;
             healthSlider.maxValue = startHealth;
             healthSlider.value = _health;
+            animator.enabled = true;
+        }
+
+        private void FixedUpdate()
+        {
+            healthSlider.transform.LookAt(_cameraTransform);
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine(DeactivationEnemy()); 
         }
 
         public bool TakeDamage()
@@ -27,13 +55,26 @@ namespace Views
             _health--;
             healthSlider.value = _health;
             if (_health > 0) return false;
-            gameObject.SetActive(false); 
+            animator.enabled = false;
+            StartCoroutine(DeactivationEnemy());
             return true;
         }
 
-        private void FixedUpdate()
+        private IEnumerator DeactivationEnemy()
         {
-            healthSlider.transform.LookAt(_cameraTransform);
+            healthSlider.gameObject.SetActive(false);
+            rootCollider.enabled = false;
+            RigidbodyActivation(true);
+            yield return new WaitForSeconds(deactivateTime);
+            gameObject.SetActive(false);
+        }
+
+        private void RigidbodyActivation(bool activate)
+        {
+            foreach (var rb in rigidbodies)
+            {
+                rb.isKinematic = !activate;
+            }
         }
     }
 }

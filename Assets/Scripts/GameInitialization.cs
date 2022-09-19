@@ -18,12 +18,12 @@ public class GameInitialization
             var cameraTransform = playerView.GetPlayerCamera.transform;
             var allEnemySpawnViews = Object.FindObjectsOfType<EnemySpawnView>();
             
-            var playerController = new PlayerController(playerView, waypointView.GetWaypoints, prefabsData.bulletPrefab, SpawnEnemies(allEnemySpawnViews, prefabsData.enemyPrefab, cameraTransform));
+            var playerController = new PlayerController(playerView, waypointView.GetWaypoints, prefabsData.bulletPrefab, CreateEnemies(allEnemySpawnViews, prefabsData.enemyPrefab, cameraTransform));
 
             monoController.Add(playerController);
         }
 
-        private List<GameObject> SpawnEnemies(EnemySpawnView[] enemySpawnViews, GameObject[] enemyPrefabs, Transform cameraTransform)
+        private List<GameObject> CreateEnemies(EnemySpawnView[] enemySpawnViews, GameObject[] enemyPrefabs, Transform cameraTransform)
         {
             var enemyRoot = new GameObject("EnemyRoot");
             var enemiesGameObjects = new List<GameObject>();
@@ -36,15 +36,14 @@ public class GameInitialization
                         enemyTransforms = enemySpawnView.GetSpawnPositions.ToList();
                         foreach (var enemyTransform in enemyTransforms)
                         {
-                            enemiesGameObjects.Add(Spawn(enemyPrefabs[(int)EnemyType.FirstEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
-
+                            enemiesGameObjects.Add(SpawnEnemy(enemyPrefabs[(int)EnemyType.FirstEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
                         }
                         break;
                     case EnemyType.SecondEnemyType:
                         enemyTransforms = enemySpawnView.GetSpawnPositions.ToList();
                         foreach (var enemyTransform in enemyTransforms)
                         {
-                            enemiesGameObjects.Add(Spawn(enemyPrefabs[(int)EnemyType.SecondEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
+                            enemiesGameObjects.Add(SpawnEnemy(enemyPrefabs[(int)EnemyType.SecondEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
                         }
                         break;
                     default:
@@ -55,11 +54,11 @@ public class GameInitialization
             return enemiesGameObjects;
         }
 
-        private GameObject Spawn(GameObject enemyPrefab, Transform spawnPosition, Transform cameraTransform, Transform rootTransform)
+        private GameObject SpawnEnemy(GameObject enemyPrefab, Transform spawnPosition, Transform cameraTransform, Transform rootTransform)
         {
             var enemy = Object.Instantiate(enemyPrefab, spawnPosition.position, spawnPosition.rotation,
                 rootTransform);
-            enemy.GetComponent<EnemyView>().SetCameraTransform(cameraTransform);
+            enemy.GetComponent<EnemyView>().Init(cameraTransform);
             return enemy;
         }
 }

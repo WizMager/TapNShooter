@@ -24,7 +24,6 @@ namespace State
         
         public override void Start()
         {
-            Debug.Log("Start shoot");
             _inputActions.Player.Touch.performed += OnTouchHandler;
             _enemyCount = 4;
         }
@@ -38,7 +37,6 @@ namespace State
             var bulletView = _bulletPool.Pop();
             bulletView.OnHit += OnHitHandler;
             bulletView.Shoot(_shootPosition, bulletDirection.normalized);
-            //Debug.DrawRay(_shootPosition.position, bulletDirection.normalized, Color.red, 1000f);
         }
 
         private void OnHitHandler(BulletView bulletView, bool hitEnemy)
@@ -62,7 +60,6 @@ namespace State
 
         public override void Stop()
         {
-            Debug.Log("Stop shoot");
             _inputActions.Player.Touch.performed -= OnTouchHandler;
         }
     }
