@@ -7,5 +7,6 @@ namespace Data
     {
         public GameObject playerPrefab;
         public GameObject bulletPrefab;
+        public GameObject enemyPrefab;
     }
 }

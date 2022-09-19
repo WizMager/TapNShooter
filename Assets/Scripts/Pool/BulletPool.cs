@@ -8,11 +8,13 @@ namespace Pool
     {
         private readonly GameObject _bulletPrefab;
         private readonly Stack<BulletView> _storage;
+        private readonly Transform _rooTransform;
 
         public BulletPool(GameObject bulletPrefab, int storageAmount)
         {
             _bulletPrefab = bulletPrefab;
             _storage = new Stack<BulletView>(storageAmount);
+            _rooTransform = new GameObject("PoolRoot").GetComponent<Transform>();
             FillPool(storageAmount);
         }
 
@@ -40,7 +42,7 @@ namespace Pool
 
         private BulletView Create()
         {
-            var bullet = Object.Instantiate(_bulletPrefab);
+            var bullet = Object.Instantiate(_bulletPrefab, _rooTransform);
             var bulletView = bullet.GetComponent<BulletView>();
             return bulletView;
         }

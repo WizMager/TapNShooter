@@ -20,8 +20,6 @@ namespace State
         
         public override void Start()
         {
-            Debug.Log("Start idle");
-            
             _playerTransform.SetPositionAndRotation(_playerSpawnPosition.position, _playerSpawnPosition.rotation);
             foreach (var enemy in _allEnemies)
             {
@@ -37,7 +35,6 @@ namespace State
 
         public override void Stop()
         {
-            Debug.Log("Stop idle");
             _inputActions.Player.Touch.performed -= OnTouchHandler;
         }
     }
