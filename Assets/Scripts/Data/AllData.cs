@@ -7,6 +7,7 @@ namespace Data
     public class AllData: ScriptableObject
     {
         [SerializeField] private PrefabsData prefabsData;
+        [SerializeField] private EnemyData[] enemyData;
 
         public PrefabsData GetPrefabsData
         {
@@ -17,6 +18,18 @@ namespace Data
                     return prefabsData;
                 }
                 throw new ArgumentNullException("PrefabsData is null. Forget create or linked?");
+            }
+        }
+        
+        public EnemyData[] GetEnemyData
+        {
+            get
+            {
+                if (enemyData != null)
+                {
+                    return enemyData;
+                }
+                throw new ArgumentNullException("EnemyData is null. Forget create or linked?");
             }
         }
     }

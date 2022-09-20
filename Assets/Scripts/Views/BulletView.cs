@@ -8,6 +8,7 @@ namespace Views
         public Action<BulletView, bool> OnHit;
         [SerializeField] private Rigidbody bulletRigidbody;
         [SerializeField] private float bulletSpeed;
+        [SerializeField] private int bulletPoolStorage;
 
         public void Shoot(Transform shootPosition, Vector3 forceDirection)
         {
@@ -19,8 +20,8 @@ namespace Views
         {
             if (other.CompareTag("Enemy"))
             {
-                var enemyDead = other.GetComponent<EnemyView>().TakeDamage();
-                OnHit?.Invoke(this, enemyDead);
+                //var enemyDead = other.GetComponent<EnemyView>().EnemyNumber;
+                //OnHit?.Invoke(this, enemyDead);
             }
             else
             {

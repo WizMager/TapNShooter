@@ -1,80 +1,44 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Views
 {
     public class EnemyView : MonoBehaviour
     {
-        [SerializeField] private int startHealth;
         [SerializeField] private Slider healthSlider;
         [SerializeField] private Animator animator;
-        [SerializeField] private CapsuleCollider rootCollider;
+        [SerializeField] private CapsuleCollider hitCollider;
         [SerializeField] private Rigidbody[] rigidbodies;
+        [SerializeField] private Transform hip;
+        [SerializeField] private int startHealth;
         [SerializeField] private float deactivateTime;
-        [SerializeField] private Transform hips;
-        private int _health;
-        private Transform _cameraTransform;
-        private Vector3 _startHipsPosition;
+        private int _number;
 
-        public void Init(Transform cameraTransform)
-        {
-            _cameraTransform = cameraTransform;
-        }
-
-        private void Awake()
-        {
-            _startHipsPosition = hips.position;
-        }
-
+        public Slider GetSlider => healthSlider;
+        public Animator GetAnimator => animator;
+        public CapsuleCollider GetHitCollider => hitCollider;
+        public Rigidbody[] GetRagDollRigidbodies => rigidbodies;
+        public Transform GetHip => hip;
+        public int GetStartHealth => startHealth;
+        public float GetDeactivateTime => deactivateTime;
+        public int EnemyNumber { get; set; }
+        
+        
         private void OnEnable()
         {
-            RigidbodyActivation(false);
-            hips.position = _startHipsPosition;
-            rootCollider.enabled = true;
-            healthSlider.gameObject.SetActive(true);
-            _health = startHealth;
-            healthSlider.maxValue = startHealth;
-            healthSlider.value = _health;
-            animator.enabled = true;
+            
         }
 
         private void FixedUpdate()
         {
-            healthSlider.transform.LookAt(_cameraTransform);
+            
         }
 
         private void OnDisable()
         {
-            StopCoroutine(DeactivationEnemy()); 
+            
         }
 
-        public bool TakeDamage()
-        {
-            _health--;
-            healthSlider.value = _health;
-            if (_health > 0) return false;
-            animator.enabled = false;
-            StartCoroutine(DeactivationEnemy());
-            return true;
-        }
-
-        private IEnumerator DeactivationEnemy()
-        {
-            healthSlider.gameObject.SetActive(false);
-            rootCollider.enabled = false;
-            RigidbodyActivation(true);
-            yield return new WaitForSeconds(deactivateTime);
-            gameObject.SetActive(false);
-        }
-
-        private void RigidbodyActivation(bool activate)
-        {
-            foreach (var rb in rigidbodies)
-            {
-                rb.isKinematic = !activate;
-            }
-        }
+        
     }
 }

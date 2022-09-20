@@ -58,7 +58,7 @@ public class GameInitialization
         {
             var enemy = Object.Instantiate(enemyPrefab, spawnPosition.position, spawnPosition.rotation,
                 rootTransform);
-            enemy.GetComponent<EnemyView>().Init(cameraTransform);
+            enemy.GetComponent<EnemyView>();
             return enemy;
         }
 }
