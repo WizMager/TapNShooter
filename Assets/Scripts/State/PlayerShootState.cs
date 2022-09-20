@@ -10,21 +10,23 @@ namespace State
         private readonly Transform _shootPosition;
         private readonly BulletPool _bulletPool;
         private readonly int _waypointsCount;
+        private readonly int[] _enemySpawnPositions;
         private int _enemyCount;
         private int _checkedWaypoint = 1;
         
-        public PlayerShootState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions, GameObject bulletPrefab, int waypointsCount) : base(player, stateSwitcher, inputActions)
+        public PlayerShootState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions, GameObject bulletPrefab, int waypointsCount, int[] enemySpawnPosition) : base(player, stateSwitcher, inputActions)
         {
             _camera = player.GetPlayerCamera;
             _shootPosition = player.GetShootPosition;
             _waypointsCount = waypointsCount;
             _bulletPool = new BulletPool(bulletPrefab, 5);
+            _enemySpawnPositions = enemySpawnPosition;
         }
         
         public override void Start()
         {
             _inputActions.Player.Touch.performed += OnTouchHandler;
-            _enemyCount = 4;
+            _enemyCount = _enemySpawnPositions[_checkedWaypoint - 1];
         }
 
         private void OnTouchHandler(InputAction.CallbackContext obj)

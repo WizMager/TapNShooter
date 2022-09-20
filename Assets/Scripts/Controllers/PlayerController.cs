@@ -12,14 +12,14 @@ namespace Controllers
         private BaseState _currentState;
         private readonly List<BaseState> _allStates;
 
-        public PlayerController(Player player, Transform[] waypoints, GameObject bulletPrefab, List<GameObject> allEnemies)
+        public PlayerController(Player player, Transform[] waypoints, GameObject bulletPrefab, List<GameObject> allEnemies, int[] enemySpawnPositions)
         {
             _inputActions = new InputActions();
             _allStates = new List<BaseState>
             {
                 new PlayerIdleState(player, this, _inputActions, waypoints[0], allEnemies),
                 new PlayerRunState(player, this, _inputActions, waypoints),
-                new PlayerShootState(player, this, _inputActions, bulletPrefab, waypoints.Length)
+                new PlayerShootState(player, this, _inputActions, bulletPrefab, waypoints.Length, enemySpawnPositions)
             };
             _currentState = _allStates[0];
             _currentState.Start();

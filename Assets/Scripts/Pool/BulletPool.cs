@@ -41,18 +41,18 @@ namespace Pool
 
         private Bullet Create()
         {
-            var bullet = Object.Instantiate(_bulletPrefab, _rooTransform);
-            var bulletView = bullet.GetComponent<Bullet>();
-            return bulletView;
+            var bulletGameObject = Object.Instantiate(_bulletPrefab, _rooTransform);
+            var bullet = bulletGameObject.GetComponent<Bullet>();
+            return bullet;
         }
 
         private void FillPool(int storageAmount)
         {
             for (int i = 0; i < storageAmount; i++)
             {
-                var bulletView = Create();
-                bulletView.gameObject.SetActive(false);
-                Push(bulletView); 
+                var bullet = Create();
+                bullet.gameObject.SetActive(false);
+                Push(bullet); 
             }
         }
     }
