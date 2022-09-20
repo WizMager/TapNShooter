@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Controllers;
 using Data;
 using UnityEngine;
-using Utils;
 using Object = UnityEngine.Object;
 
 public class GameInitialization
@@ -27,29 +25,14 @@ public class GameInitialization
             var enemyRoot = new GameObject("EnemyRoot");
             var enemiesGameObjects = new List<GameObject>();
             List<Transform> enemyTransforms;
-            foreach (var enemySpawnView in enemySpawnViews)
+            foreach (var enemySpawn in enemySpawnViews)
             {
-                switch (enemySpawnView.GetEnemyType)
+                enemyTransforms = enemySpawn.GetSpawnPositions.ToList();
+                foreach (var enemyTransform in enemyTransforms)
                 {
-                    case EnemyType.FirstEnemyType:
-                        enemyTransforms = enemySpawnView.GetSpawnPositions.ToList();
-                        foreach (var enemyTransform in enemyTransforms)
-                        {
-                            enemiesGameObjects.Add(SpawnEnemy(enemyPrefabs[(int)EnemyType.FirstEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
-                        }
-                        break;
-                    case EnemyType.SecondEnemyType:
-                        enemyTransforms = enemySpawnView.GetSpawnPositions.ToList();
-                        foreach (var enemyTransform in enemyTransforms)
-                        {
-                            enemiesGameObjects.Add(SpawnEnemy(enemyPrefabs[(int)EnemyType.SecondEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    enemiesGameObjects.Add(SpawnEnemy(enemyPrefabs[enemySpawn.GetEnemyType], enemyTransform, cameraTransform, enemyRoot.transform));
                 }
             }
-
             return enemiesGameObjects;
         }
 
