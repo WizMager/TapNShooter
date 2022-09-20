@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Views;
 
 namespace State
 {
@@ -11,9 +10,9 @@ namespace State
         private readonly Transform _playerSpawnPosition;
         private readonly List<GameObject> _allEnemies;
 
-        public PlayerIdleState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions, Transform playerSpawnPosition, List<GameObject> allEnemies) : base(playerView, stateSwitcher, inputActions)
+        public PlayerIdleState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions, Transform playerSpawnPosition, List<GameObject> allEnemies) : base(player, stateSwitcher, inputActions)
         {
-            _playerTransform = playerView.GetPlayerTransform;
+            _playerTransform = player.GetPlayerTransform;
             _playerSpawnPosition = playerSpawnPosition;
             _allEnemies = allEnemies;
         }

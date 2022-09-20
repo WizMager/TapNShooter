@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Views;
 
 namespace State
 {
@@ -12,11 +11,11 @@ namespace State
         private readonly Transform _playerTransform;
         private int _currentWaypoint;
 
-        public PlayerRunState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions, Transform[] waypoints) : base(playerView, stateSwitcher, inputActions)
+        public PlayerRunState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions, Transform[] waypoints) : base(player, stateSwitcher, inputActions)
         {
-            _navMeshAgent = playerView.GetNavMeshAgent;
+            _navMeshAgent = player.GetNavMeshAgent;
             _wayPoints = new List<Transform>(waypoints.Length);
-            _playerTransform = playerView.GetPlayerTransform;
+            _playerTransform = player.GetPlayerTransform;
             foreach (var waypoint in waypoints)
             {
                 _wayPoints.Add(waypoint);

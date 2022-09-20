@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Controllers.Interfaces;
-using Data;
 using State;
 using UnityEngine;
-using Views;
 
 namespace Controllers
 {
@@ -14,14 +12,14 @@ namespace Controllers
         private BaseState _currentState;
         private readonly List<BaseState> _allStates;
 
-        public PlayerController(PlayerView playerView, Transform[] waypoints, GameObject bulletPrefab, List<GameObject> allEnemies)
+        public PlayerController(Player player, Transform[] waypoints, GameObject bulletPrefab, List<GameObject> allEnemies)
         {
             _inputActions = new InputActions();
             _allStates = new List<BaseState>
             {
-                new PlayerIdleState(playerView, this, _inputActions, waypoints[0], allEnemies),
-                new PlayerRunState(playerView, this, _inputActions, waypoints),
-                new PlayerShootState(playerView, this, _inputActions, bulletPrefab, waypoints.Length)
+                new PlayerIdleState(player, this, _inputActions, waypoints[0], allEnemies),
+                new PlayerRunState(player, this, _inputActions, waypoints),
+                new PlayerShootState(player, this, _inputActions, bulletPrefab, waypoints.Length)
             };
             _currentState = _allStates[0];
             _currentState.Start();

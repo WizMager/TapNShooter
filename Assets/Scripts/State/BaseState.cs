@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Views;
 
 namespace State
 {
@@ -9,9 +8,9 @@ namespace State
         protected IStateSwitcher _stateSwitcher;
         protected InputActions _inputActions;
 
-        protected BaseState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions)
+        protected BaseState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions)
         {
-            _animator = playerView.GetAnimator;
+            _animator = player.GetAnimator;
             _stateSwitcher = stateSwitcher;
             _inputActions = inputActions;
         }

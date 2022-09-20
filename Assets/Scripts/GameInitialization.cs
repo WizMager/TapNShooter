@@ -5,7 +5,6 @@ using Controllers;
 using Data;
 using UnityEngine;
 using Utils;
-using Views;
 using Object = UnityEngine.Object;
 
 public class GameInitialization
@@ -13,17 +12,17 @@ public class GameInitialization
         public GameInitialization(AllData data, MonoController monoController)
         {
             var prefabsData = data.GetPrefabsData;
-            var waypointView = Object.FindObjectOfType<WaypointView>();
-            var playerView = Object.Instantiate(prefabsData.playerPrefab, waypointView.GetWaypoints[0].position, waypointView.GetWaypoints[0].rotation).GetComponent<PlayerView>();
+            var waypointView = Object.FindObjectOfType<Waypoint>();
+            var playerView = Object.Instantiate(prefabsData.playerPrefab, waypointView.GetWaypoints[0].position, waypointView.GetWaypoints[0].rotation).GetComponent<Player>();
             var cameraTransform = playerView.GetPlayerCamera.transform;
-            var allEnemySpawnViews = Object.FindObjectsOfType<EnemySpawnView>();
+            var allEnemySpawnViews = Object.FindObjectsOfType<EnemySpawn>();
             
             var playerController = new PlayerController(playerView, waypointView.GetWaypoints, prefabsData.bulletPrefab, CreateEnemies(allEnemySpawnViews, prefabsData.enemyPrefab, cameraTransform));
 
             monoController.Add(playerController);
         }
 
-        private List<GameObject> CreateEnemies(EnemySpawnView[] enemySpawnViews, GameObject[] enemyPrefabs, Transform cameraTransform)
+        private List<GameObject> CreateEnemies(EnemySpawn[] enemySpawnViews, GameObject[] enemyPrefabs, Transform cameraTransform)
         {
             var enemyRoot = new GameObject("EnemyRoot");
             var enemiesGameObjects = new List<GameObject>();
@@ -58,7 +57,7 @@ public class GameInitialization
         {
             var enemy = Object.Instantiate(enemyPrefab, spawnPosition.position, spawnPosition.rotation,
                 rootTransform);
-            enemy.GetComponent<EnemyView>().Init(cameraTransform);
+            enemy.GetComponent<Enemy>().Init(cameraTransform);
             return enemy;
         }
 }

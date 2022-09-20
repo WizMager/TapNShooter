@@ -1,7 +1,6 @@
 ﻿using Pool;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Views;
 
 namespace State
 {
@@ -14,10 +13,10 @@ namespace State
         private int _enemyCount;
         private int _checkedWaypoint = 1;
         
-        public PlayerShootState(PlayerView playerView, IStateSwitcher stateSwitcher, InputActions inputActions, GameObject bulletPrefab, int waypointsCount) : base(playerView, stateSwitcher, inputActions)
+        public PlayerShootState(Player player, IStateSwitcher stateSwitcher, InputActions inputActions, GameObject bulletPrefab, int waypointsCount) : base(player, stateSwitcher, inputActions)
         {
-            _camera = playerView.GetPlayerCamera;
-            _shootPosition = playerView.GetShootPosition;
+            _camera = player.GetPlayerCamera;
+            _shootPosition = player.GetShootPosition;
             _waypointsCount = waypointsCount;
             _bulletPool = new BulletPool(bulletPrefab, 5);
         }
@@ -39,10 +38,10 @@ namespace State
             bulletView.Shoot(_shootPosition, bulletDirection.normalized);
         }
 
-        private void OnHitHandler(BulletView bulletView, bool hitEnemy)
+        private void OnHitHandler(Bullet bullet, bool hitEnemy)
         {
-            bulletView.OnHit -= OnHitHandler;
-            _bulletPool.Push(bulletView);
+            bullet.OnHit -= OnHitHandler;
+            _bulletPool.Push(bullet);
             if (!hitEnemy) return;
             _enemyCount--;
             if (_enemyCount > 0) return;
