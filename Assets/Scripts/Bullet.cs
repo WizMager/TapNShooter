@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,7 +7,19 @@ public class Bullet : MonoBehaviour
     public Action<Bullet, bool> OnHit;
     [SerializeField] private Rigidbody bulletRigidbody;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float timeBeforeReturnToPool;
+    
+    private void OnEnable()
+    {
+        StartCoroutine(DelayReturnToPool());
+    }
 
+    private IEnumerator DelayReturnToPool()
+    {
+        yield return new WaitForSeconds(timeBeforeReturnToPool);
+        OnHit?.Invoke(this, false);
+    }
+    
     public void Shoot(Transform shootPosition, Vector3 forceDirection)
     {
         transform.SetPositionAndRotation(shootPosition.position, shootPosition.rotation);
@@ -28,6 +41,7 @@ public class Bullet : MonoBehaviour
 
     private void OnDisable()
     {
+        StopCoroutine(DelayReturnToPool());
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.angularVelocity = Vector3.zero;
     }

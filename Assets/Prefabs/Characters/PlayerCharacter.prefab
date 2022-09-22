@@ -158,6 +158,8 @@ MonoBehaviour:
   animator: {fileID: 95389170962898660}
   playerCamera: {fileID: 2714755607403207793}
   moveSpeed: 3.5
+  waitBeforeInputOn: 0.5
+  waitAfterShoot: 1
 --- !u!1 &1063867024875804
 GameObject:
   m_ObjectHideFlags: 0
